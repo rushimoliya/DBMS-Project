@@ -1,0 +1,161 @@
+{% extends "base.html" %} {% block title %} Patient's Booking {% endblock title
+%} {% block body %}
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="card" style="width: 18rem">
+        <img
+          src="./static/doc.jpg"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title">HOSPITAL DOCTORS</h5>
+          <p class="card-text">Doctors Names</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Rushi Moliya</li>
+          <li class="list-group-item">Rushi Moliya</li>
+          <li class="list-group-item">Rushi Moliya</li>
+        </ul>
+        <div class="card-body">
+          <a href="#" class="card-link">Contact Us</a>
+          <a href="#" class="card-link">About US</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-5 bg-dark-subtle p-5 rounded-lg ">
+      <h4 class="text-center text-drk">Book Your Slot</h4>
+      <br />
+
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+
+{% endfor %}
+{% endif %}
+{% endwith %}
+      <form action="/patients" method="post" class="jumbotron">
+        <div class="form-group ">
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            value="{{current_user.email}}"
+            name="email"
+            required
+          />
+        </div>
+
+        <br>
+
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            placeholder="Full Name"
+            required
+          />
+        </div>
+
+        <br>
+
+        <div class="form-group">
+          <select class="form-control" id="gender" name="gender" required>
+            <option selected>Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Others">Others</option>
+          </select>
+        </div>
+
+        <br>
+        
+        <div class="form-group">
+          <select class="form-control" id="slot" name="slot" required>
+            <option selected>Slot</option>
+            <option value="morning">Morning</option>
+            <option value="evening">Evening</option>
+            <option value="night">Night</option>
+          </select>
+        </div>
+
+        <br>
+
+        <div class="form-group">
+          <input
+            type="time"
+            class="form-control"
+            name="time"
+            placeholder="Time"
+            required
+          />
+        </div>
+
+        <br>
+
+        <div class="form-group">
+          <input
+            type="date"
+            class="form-control"
+            name="date"
+            placeholder="date"
+            required
+          />
+        </div>
+        <br>
+
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="disease"
+            name="disease"
+            placeholder="Disease"
+            required
+          />
+        </div>
+
+        <br>
+
+        <div class="form-group">
+          <select class="form-control" id="dept" name="dept" required>
+            <option selected>Select Doctor Department</option>
+            {% for d in doct %}
+            <option value="{{d.dept}}">{{d.dept}}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <br>
+
+        <div class="form-group">
+          <input
+            type="number"
+            class="form-control"
+            id="number"
+            name="number"
+            placeholder="Phone Number"
+            required
+          />
+        </div>
+
+        <br>
+
+        <div class="d-grid gap-2">
+            <input class="btn btn-dark" type="submit" value="Book Slot"></input>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock body %}
