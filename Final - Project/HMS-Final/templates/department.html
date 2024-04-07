@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}
+{% endblock title %}
+
+{% block body %}
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+
+{% endfor %}
+{% endif %}
+{% endwith %}
+<div class="container mt-3">
+    <div class="row">
+    
+    <div class="col-md-4"></div>
+    
+    <div class="col-md-4 bg-dark-subtle p-5 rounded-lg">
+    <br>
+    
+    <h4 class="text-center text-dark"> Department </h4>
+    <br>
+    <form action="/department" method="POST">
+        <div class="form-group">
+          <label for="department_id" class="form-label">Department ID</label>
+          <input type="number" class="form-control" name="department_id" id="department_id">
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="name" class="form-label">Name</label>
+            <input type="string" class="form-control" name="name" id="name">
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="head_id" class="form-label">Head ID</label>
+            <input type="number" class="form-control" name="head_id" id="head_id">
+        </div>
+        <br>
+
+        <div class="d-grid gap-2">
+            <input class="btn btn-dark" type="submit" value="Add Department"></input>
+        </div>
+    </form>
+</div>
+<div class="col-md-4"></div></div>
+
+</div>
+
+<div class="container my-4">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Department ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Head ID</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for de in alldepartment %}
+            <tr>
+                <th scope="row">{{de.department_id}}</th>
+                <td>{{de.name}}</td>
+                <td>{{de.head_id}}</td>
+                <td>
+                    <a href="/updatedepartment/{{de.department_id}}" type="button" class="btn btn-outline-dark btn-sm mx-2">Update</button>
+                    <a href="/deletedepartment/{{de.department_id}}" type="button" class="btn btn-outline-dark btn-sm mx-2">Delete</button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+  
+
+
+
+{% endblock body %}

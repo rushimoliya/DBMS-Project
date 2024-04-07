@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}
+    HOME
+{% endblock title %}
+
+{% block body %}
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="container mt-3">
+    <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 bg-dark-subtle p-5 rounded-lg">
+    <br>
+    <h4 class="text-center text-dark"> Update Undergoes </h4>
+    <br>
+    <form action="/updateprescribes/{{pr.pre_id}}" method="POST">
+        <div class="mb-3">
+            <div class="form-group">
+                <label for="doc_id" class="form-label">Doctor ID</label>
+                <input type="number" class="form-control" name="doc_id" id="doc_id" value="{{pr.doc_id}}">
+            </div>
+            <div class="form-group">
+                <label for="pat_id" class="form-label">Patient ID</label>
+                <input type="number" class="form-control" name="pat_id" id="pat_id" value="{{pr.pat_id}}">
+            </div>
+            <div class="form-group">
+                <label for="med_code" class="form-label">Medication Code</label>
+                <input type="number" class="form-control" name="med_code" id="med_code" value="{{pr.med_code}}">
+            </div>
+            <div class="form-group">
+                <label for="p_date" class="form-label">Date</label>
+                <input type="date" class="form-control" name="p_date" id="p_date" value="{{pr.p_date}}">
+            </div>
+            <div class="form-group">
+                <label for="app_id" class="form-label">Appointment ID</label>
+                <input type="number" class="form-control" name="app_id" id="app_id" value="{{pr.app_id}}">
+            </div>
+            <div class="form-group">
+                <label for="dose" class="form-label">Dose</label>
+                <input type="number" class="form-control" name="dose" id="dose" value="{{pr.dose}}">
+            </div>
+        </div>
+        <div class="d-grid gap-2">
+            <input class="btn btn-dark" type="submit" value="Update"></input>
+        </div>
+    </form>
+    </div>
+    <div class="col-md-4"></div></div>
+
+</div>
+
+{% endblock body %}

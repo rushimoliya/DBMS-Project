@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}
+    HOME
+{% endblock title %}
+
+{% block body %}
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="container mt-3">
+    <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 bg-dark-subtle p-5 rounded-lg">
+    <br>
+    <h4 class="text-center text-dark"> Update Nurse </h4>
+    <br>
+    <form action="/updatenurse/{{n.nur_id}}" method="POST">
+        <div class="mb-3">
+            <div class="form-group">
+                <label for="nur_first_name" class="form-label">First Name</label>
+                <input type="text" class="form-control" name="nur_first_name" id="nur_first_name" value="{{n.nur_first_name}}">
+            </div>
+            <div class="form-group">
+                <label for="nur_last_name" class="form-label">Last Name</label>
+                <input type="text" class="form-control" name="nur_last_name" id="nur_last_name" value="{{n.nur_last_name}}">
+            </div>
+            <div class="form-group">
+                <label for="nur_ph_no" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" name="nur_ph_no" id="nur_ph_no" value="{{n.nur_ph_no}}">
+            </div>
+            <div class="form-group">
+                <label for="nur_date" class="form-label">Date</label>
+                <input type="date" class="form-control" name="nur_date" id="nur_date" value="{{n.nur_date}}">
+            </div>
+            <div class="form-group">
+                <label for="nur_address" class="form-label">Address</label>
+                <input type="text" class="form-control" name="nur_address" id="nur_address" value="{{n.nur_address}}">
+            </div>
+        </div>
+        <div class="d-grid gap-2">
+            <input class="btn btn-dark" type="submit" value="Update"></input>
+        </div>
+    </form>
+    <div class="col-md-4"></div></div>
+</div>
+
+{% endblock body %}

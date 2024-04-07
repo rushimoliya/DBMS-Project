@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}
+    HOME
+{% endblock title %}
+
+{% block body %}
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="container mt-3">
+    <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 bg-dark-subtle p-5 rounded-lg">
+    <br>
+    <h4 class="text-center text-dark"> Update Undergoes </h4>
+    <br>
+    <form action="/updateundergoes/{{u.under_id}}" method="POST">
+        <div class="mb-3">
+            <div class="form-group">
+                <label for="pat_id" class="form-label">Patient ID</label>
+                <input type="number" class="form-control" name="pat_id" id="pat_id" value="{{u.pat_id}}">
+            </div>
+            <div class="form-group">
+                <label for="proc_code" class="form-label">Procedure Code</label>
+                <input type="number" class="form-control" name="proc_code" id="proc_code" value="{{u.proc_code}}">
+            </div>
+            <div class="form-group">
+                <label for="u_date" class="form-label">Date</label>
+                <input type="date" class="form-control" name="u_date" id="u_date" value="{{u.u_date}}">
+            </div>
+            <div class="form-group">
+                <label for="doc_id" class="form-label">Doctor ID</label>
+                <input type="number" class="form-control" name="doc_id" id="doc_id" value="{{u.doc_id}}">
+            </div>
+            <div class="form-group">
+                <label for="nur_id" class="form-label">Nurse ID</label>
+                <input type="number" class="form-control" name="nur_id" id="nur_id" value="{{u.nur_id}}">
+            </div>
+            <div class="form-group">
+                <label for="room_no" class="form-label">Room Number</label>
+                <input type="number" class="form-control" name="room_no" id="room_no" value="{{u.room_no}}">
+            </div>
+        </div>
+      <div class="d-grid gap-2">
+        <input class="btn btn-dark" type="submit" value="Update"></input>
+      </div>
+    </form>
+    </div>
+    <div class="col-md-4"></div></div>
+
+</div>
+
+{% endblock body %}

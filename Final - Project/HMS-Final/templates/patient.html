@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block title %}
+    Patient
+{% endblock title %}
+
+{% block body %}
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+
+{% endfor %}
+{% endif %}
+{% endwith %}
+<div class="container mt-3">
+    <div class="row">
+    
+    <div class="col-md-4"></div>
+    
+    <div class="col-md-4 bg-dark-subtle p-5 rounded-lg">
+    <br>
+    
+    <h4 class="text-center text-dark"> Patient </h4>
+    <br>
+                <form action="/patient" method="POST">
+                    <div class="form-group">
+                      <label for="pat_id" class="form-label">Patient ID</label>
+                      <input type="number" class="form-control" name="pat_id" id="pat_id">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="pat_first_name" class="form-label">First Name</label>
+                        <input type="text" class="form-control" name="pat_first_name" id="pat_first_name">
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="pat_last_name" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" name="pat_last_name" id="pat_last_name">
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="pat_insurance_no" class="form-label">Insurance Number</label>
+                        <input type="text" class="form-control" name="pat_insurance_no" id="pat_insurance_no">
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="pat_ph_no" class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" name="pat_ph_no" id="pat_ph_no">
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="pat_date" class="form-label">Date</label>
+                        <input type="date" class="form-control" name="pat_date" id="pat_date">
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="pat_address" class="form-label">Address</label>
+                        <input type="text" class="form-control" name="pat_address" id="pat_address">
+                    </div>
+                    <br>
+                    <div class="d-grid gap-2">
+                        <input class="btn btn-dark" type="submit" value="Add Patient"></input>
+                    </div>
+                </form>
+            </div>
+        
+        <div class="col-md-4"></div></div>
+
+            <div class="container my-4">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Insurance</th>
+                        <th scope="col">Ph.No</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for p in allpatient %}
+                        <tr>
+                            <th scope="row">{{p.pat_id}}</th>
+                            <td>{{p.pat_first_name}}</td>
+                            <td>{{p.pat_last_name}}</td>
+                            <td>{{p.pat_insurance_no}}</td>
+                            <td>{{p.pat_ph_no}}</td>
+                            <td>{{p.pat_date}}</td>
+                            <td>{{p.pat_address}}</td>
+                            <td>
+                                <a href="/updatepatient/{{p.pat_id}}" type="button" class="btn btn-outline-dark btn-sm mx-2">Update</button>
+                                <a href="/deletepatient/{{p.pat_id}}" type="button" class="btn btn-outline-dark btn-sm mx-2">Delete</button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+    
+
+
+
+{% endblock body %} 
+
+       

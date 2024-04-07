@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}
+    HOME
+{% endblock title %}
+
+{% block body %}
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="container mt-3">
+    <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 bg-dark-subtle p-5 rounded-lg">
+    <br>
+    <h4 class="text-center text-dark"> Update Doctor </h4>
+    <br>
+    <form action="/updateappointment/{{a.app_id}}" method="POST">
+        <div class="mb-3">
+            <div class="form-group">
+                <label for="pat_id" class="form-label">Patient ID</label>
+                <input type="number" class="form-control" name="pat_id" id="pat_id" value="{{a.pat_id}}">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="doc_id" class="form-label">Doctor ID</label>
+                <input type="number" class="form-control" name="doc_id" id="doc_id" value="{{a.doc_id}}">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="appointment_date" class="form-label">Date</label>
+                <input type="date" class="form-control" name="appointment_date" id="appointment_date" value="{{a.appointment_date}}">
+            </div>
+            <br>
+
+        </div>
+      <div class="d-grid gap-2">
+          <input class="btn btn-dark" type="submit" value="Update"></input>
+      </div>
+    </form>
+    </div>
+    <div class="col-md-4"></div></div>
+
+</div>
+
+{% endblock body %}

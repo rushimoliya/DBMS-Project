@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}
+    HOME
+{% endblock title %}
+
+{% block body %}
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="container mt-3">
+    <div class="row">
+    
+    <div class="col-md-4"></div>
+    
+    <div class="col-md-4 bg-dark-subtle p-5 rounded-lg">
+    <br>
+    
+    <h4 class="text-center text-dark"> Medication </h4>
+    <br>
+    <form action="/medication" method="POST">
+        <div class="form-group">
+          <label for="code" class="form-label">Medication Code</label>
+          <input type="number" class="form-control" name="code" id="code">
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" name="name" id="name">
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="brand" class="form-label">Brand</label>
+            <input type="text" class="form-control" name="brand" id="brand">
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" name="description" id="description">
+        </div>
+        <br>
+        <div class="d-grid gap-2">
+            <input class="btn btn-dark" type="submit" value="Add Medication"></input>
+        </div>
+        </form>
+    </div>
+    <div class="col-md-4"></div></div>
+
+</div>
+
+<div class="container my-4">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Code</th>
+            <th scope="col">Name</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Description</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for m in allmedication %}
+            <tr>
+                <th scope="row">{{m.code}}</th>
+                <td>{{m.name}}</td>
+                <td>{{m.brand}}</td>
+                <td>{{m.description}}</td>
+                <td>
+                    <a href="/updatemedication/{{m.code}}" type="button" class="btn btn-outline-dark btn-sm mx-2">Update</button>
+                    <a href="/deletemedication/{{m.code}}" type="button" class="btn btn-outline-dark btn-sm mx-2">Delete</button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+{% endblock body %}

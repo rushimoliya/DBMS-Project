@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %}
+Prescribtion
+{% endblock title %}
+
+{% block body %}
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="container mt-3">
+    <div class="row">
+    
+    <div class="col-md-4"></div>
+    
+    <div class="col-md-4 bg-dark-subtle p-5 rounded-lg">
+    <br>
+    
+    <h4 class="text-center text-dark"> Prescribtion </h4>
+    <br>
+    <form action="/prescribes" method="POST">
+        <div class="form-group">
+          <label for="pre_id" class="form-label">Prescribtion ID</label>
+          <input type="number" class="form-control" name="pre_id" id="pre_id">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="doc_id" class="form-label">Doctor ID</label>
+            <input type="number" class="form-control" name="doc_id" id="doc_id">
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="pat_id" class="form-label">Patient ID</label>
+            <input type="number" class="form-control" name="pat_id" id="pat_id">
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="med_code" class="form-label">Medication Code</label>
+            <input type="number" class="form-control" name="med_code" id="med_code">
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="p_date" class="form-label">Date</label>
+            <input type="date" class="form-control" name="p_date" id="p_date">
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="app_id" class="form-label">Appointment ID</label>
+            <input type="number" class="form-control" name="app_id" id="app_id">
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="dose" class="form-label">Dose</label>
+            <input type="number" class="form-control" name="dose" id="dose">
+        </div>
+        <br>
+        
+        <div class="d-grid gap-2">
+            <input class="btn btn-dark" type="submit" value="Add Prescribtion"></input>
+        </div>
+        </form>
+    </div>
+    <div class="col-md-4"></div></div>
+
+</div>
+
+<div class="container my-4">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Pre. Id</th>
+            <th scope="col">Doc. ID</th>
+            <th scope="col">Pat. ID</th>
+            <th scope="col">Med. Code</th>
+            <th scope="col">Date</th>
+            <th scope="col">App. ID</th>
+            <th scope="col">Dose</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for pr in allprescribes %}
+            <tr>
+                <th scope="row">{{pr.pre_id}}</th>
+                <td>{{pr.doc_id}}</td>
+                <td>{{pr.pat_id}}</td>
+                <td>{{pr.med_code}}</td>
+                <td>{{pr.p_date}}</td>
+                <td>{{pr.app_id}}</td>
+                <td>{{pr.dose}}</td>
+                <td>
+                    <a href="/updateprescribes/{{pr.pre_id}}" type="button" class="btn btn-outline-dark btn-sm mx-2">Update</button>
+                    <a href="/deleteprescribes/{{pr.pre_id}}" type="button" class="btn btn-outline-dark btn-sm mx-2">Delete</button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div> 
+
+
+
+{% endblock body %}

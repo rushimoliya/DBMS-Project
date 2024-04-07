@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}
+    HOME
+{% endblock title %}
+
+{% block body %}
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="container mt-3">
+    <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 bg-dark-subtle p-5 rounded-lg">
+    <br>
+    <h4 class="text-center text-dark"> Update Depatment </h4>
+    <br>
+    <form action="/updatedepartment/{{de.department_id}}" method="POST">
+        <div class="mb-3">
+            <div class="form-group">
+                <label for="name" class="form-label">Name</label>
+                <input type="string" class="form-control" name="name" id="name" value="{{de.name}}">
+            </div>
+            <div class="form-group">
+                <label for="head_id" class="form-label">Head ID</label>
+                <input type="number" class="form-control" name="head_id" id="head_id" value="{{de.head_id}}">
+            </div>
+        </div>
+      <div class="d-grid gap-2">
+          <input class="btn btn-dark" type="submit" value="Update"></input>
+        </div>
+    </form>
+    </div>
+    <div class="col-md-4"></div></div>
+
+</div>
+
+{% endblock body %}
