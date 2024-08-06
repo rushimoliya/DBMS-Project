@@ -1,14 +1,14 @@
 # Hospital Management System (HMS)
 
+#### Video Demo: []
+
 ## Project Overview
 
 The Hospital Management System (HMS) is a comprehensive software solution designed to streamline the operations and management of a hospital or healthcare facility. It provides a centralized platform for managing various aspects of hospital administration, including patient registration, appointment scheduling, doctor and staff management, inventory control, billing, and more. This system offers a broad overview of underlying operational factors that influence hospital management.
 
 ## Team Members
 
-- **Rushi Moliya** (Roll Number: AU2240020)
-- **Shrey Salvi** (Roll Number: AU2240033)
-- **Purvansh Desai** (Roll Number: AU2240036)
+- **Rushi Moliya**
 
 ## Introduction
 
@@ -90,4 +90,49 @@ class Patient(db.Model):
 
     def __repr__(self):
         return f"{self.patient_id} - {self.first_name} - {self.last_name} - {self.insurance_no} - {self.phone_no} - {self.date} - {self.address}"
+```
 
+## Front-end Overview
+
+The front-end is designed using HTML, CSS, Bootstrap 5, JavaScript, and Django. It includes a login/signup page and various views for managing patients, doctors, nurses, appointments, rooms, medications, departments, procedures, and prescriptions.
+
+### Example Pages
+Home Page: Displays a dropdown for different entities and provides login/signup options.
+Patient Table: Allows adding, updating, and deleting patient records.
+
+## Procedures and Triggers
+###Sample Procedures
+
+Count Patients:
+```sql
+CREATE OR REPLACE PROCEDURE count_patients(OUT patient_count INTEGER)
+LANGUAGE mysql AS $$
+BEGIN
+    SELECT COUNT(*) INTO patient_count FROM patient;
+END;
+```
+
+Count Doctors:
+```sql
+CREATE OR REPLACE PROCEDURE count_patients(OUT patient_count INTEGER)
+LANGUAGE mysql AS $$
+BEGIN
+    SELECT COUNT(*) INTO patient_count FROM patient;
+END;
+```
+
+Count Nurses:
+```sql
+CREATE OR REPLACE PROCEDURE count_patients(OUT patient_count INTEGER)
+LANGUAGE mysql AS $$
+BEGIN
+    SELECT COUNT(*) INTO patient_count FROM patient;
+END;
+```
+
+
+## Practical Usage and Application in Real Life
+
+The Hospital Management System (HMS) is a pivotal tool in modern healthcare settings, significantly enhancing operational efficiency and patient care quality. By centralizing and automating administrative tasks such as patient registration, appointment scheduling, and inventory management, HMS reduces the burden on hospital staff, allowing them to focus more on direct patient care. For instance, in a real-life scenario, a nurse can quickly access patient records, update treatment plans, and monitor medication schedules, thereby reducing the likelihood of human errors and improving patient outcomes. Additionally, doctors can efficiently manage their appointments, review patient histories, and prescribe treatments, leading to more streamlined and effective patient care processes.
+
+Beyond individual patient care, HMS offers significant benefits at the organizational level. Healthcare administrators can utilize the system to generate comprehensive reports on hospital performance, patient demographics, and treatment outcomes, facilitating data-driven decision-making. For example, the ability to track room availability and manage bed occupancy in real-time ensures optimal use of hospital resources. Furthermore, the system's integration capabilities with other healthcare software and electronic health records (EHR) enable seamless data exchange, promoting interoperability within the healthcare ecosystem. In emergency situations, such as a sudden influx of patients during a health crisis, the HMS ensures that the hospital can respond swiftly and efficiently, thereby enhancing the overall healthcare delivery system.
